@@ -4,6 +4,7 @@ const greeting=document.querySelector(".js-greetings");
 
 const USER_LS="currentUser";
 const SHOWING_CN="showing";
+
 function paintGreeting(text){
     form.classList.remove(SHOWING_CN);
     greeting.classList.add(SHOWING_CN);
