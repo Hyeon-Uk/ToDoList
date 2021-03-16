@@ -7,4 +7,5 @@ Service:
 Timer✔   
 ToDoList✔   
 Today's Weather✔   
+Random Background✔
 
