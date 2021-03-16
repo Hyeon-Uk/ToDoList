@@ -6,7 +6,6 @@ function setBackground(){
     ).then(function(response){
         const image=new Image();
         image.src=response.url;
-        console.log(response);
         image.classList.add("bg");
         body.prepend(image);
     })
