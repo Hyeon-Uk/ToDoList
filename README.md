@@ -1,10 +1,10 @@
 # ToDoList
 
 
-Address: https://hyeon-uk.github.io/ToDoList/
+Address: https://hyeon-uk.github.io/ToDoList/   
 
-Service:
-Timer✔
-ToDoList✔
-Today's Weather✔
+Service:   
+Timer✔   
+ToDoList✔   
+Today's Weather✔   
 
