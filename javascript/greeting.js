@@ -1,7 +1,7 @@
 const form = document.querySelector('.js-form');
 const input = form.querySelector('input');
 const greeting=document.querySelector(".js-greetings");
-
+const logoutBtn=document.querySelector("#logoutBtn");
 const USER_LS="currentUser";
 const SHOWING_CN="showing";
 

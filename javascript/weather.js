@@ -8,7 +8,6 @@ function getWeather(latitude,longitude){
     ).then(function(response){
         return response.json();
     }).then(function(json){
-        console.log(json);
         const temperature=json.main.temp;
         const area=json.name;
         weather.innerText=`${temperature} @ ${area}`;
