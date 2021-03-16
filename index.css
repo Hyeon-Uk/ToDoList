@@ -32,6 +32,7 @@ input:focus::placeholder{
 
 body{
     color:white;
+    background-color:black;
 }
 
 @keyframes fadeIn{
