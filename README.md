@@ -9,7 +9,7 @@ ToDoList✔
 Finished List   
 Today's Weather✔   
 Random Background✔
-Google Searchbar    
+Google Searchbar✔    
    
 Used Language:     
 JavaScript!    
