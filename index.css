@@ -40,6 +40,8 @@ input:focus::placeholder{
 body{
     color:white;
     background-color:black;
+    min-width:800px;
+    min-height:500px;
 }
 
 @keyframes fadeIn{
@@ -132,4 +134,16 @@ body{
     position: absolute;
     top:50%;
     transform:translate(-50%,-50%);
+}
+
+.toggleBtn{
+    margin-top:10px;
+    cursor:pointer;
+}
+
+#google-searchbar{
+    margin-top:50px;
+    min-width:500px;
+    width:100%;
+    height:50px;
 }

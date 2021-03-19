@@ -4,6 +4,8 @@ const greeting=document.querySelector(".js-greetings");
 const logoutBtn=document.querySelector(".renameBtn");
 const showList=document.querySelector(".js-toDoList");
 const showForm=document.querySelector(".js-toDoForm");
+const toggleBtn=document.querySelector(".toggleBtn");
+const searchForm=document.querySelector(".google-searchform");
 
 const USER_LS="currentUser";
 const SHOWING_CN="showing";
@@ -20,8 +22,10 @@ function paintGreeting(text){
 
     logoutBtn.addEventListener("click",changeName);
     logoutBtn.classList.remove("disappear");
-    showList.classList.remove("disappear");
-    showForm.classList.remove("disappear");
+    // showList.classList.remove("disappear");
+    // showForm.classList.remove("disappear");
+    toggleBtn.classList.remove("disappear");
+    searchForm.classList.remove("disappear");
 }
 
 function saveName(text){
@@ -40,6 +44,8 @@ function askForName(){
     logoutBtn.classList.add("disappear");
     showList.classList.add("disappear");
     showForm.classList.add("disappear");
+    toggleBtn.classList.add("disappear");
+    searchForm.classList.add("disappear");
 }
 
 function loadName(){
@@ -52,7 +58,14 @@ function loadName(){
     }
 }
 
+function toggleService(){
+    searchForm.classList.toggle("disappear");
+    toDoList.classList.toggle("disappear");
+    toDoForm.classList.toggle("disappear");
+}
+
 function init(){
+    toggleBtn.addEventListener("click",toggleService);
     loadName();
 }
 
