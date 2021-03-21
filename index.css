@@ -130,11 +130,17 @@ body{
 .js-toDoList > li {
     position:relative;
 }
-.js-toDoList > li >button{
+.js-toDoList > li >button:first-child{
     position: absolute;
     top:50%;
     transform:translate(-50%,-50%);
 }
+
+.js-toDoList > li >button:nth-child(1){
+    position: absolute;
+    top:50%;
+    transform:translate(-50%,-50%);
+} 
 
 .toggleBtn{
     margin-top:10px;
