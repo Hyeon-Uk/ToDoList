@@ -8,7 +8,7 @@ Timer✔
 ToDoList✔   
 Finished List   
 Today's Weather✔   
-Random Background✔
+Random Background✔   
 Google Searchbar✔     
 Responsive web design
    
