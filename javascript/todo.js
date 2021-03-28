@@ -8,7 +8,6 @@ const finishedListBtn = document.querySelector("#finishedListBtn");
 const finishedBox= document.querySelector("#js-finishedList");
 const finishedList=document.querySelector(".js-finishedList-ul");
 let toDos=[];
-
 let finished=[];
 
 function saveFinished(){
@@ -20,8 +19,12 @@ function clearToDo(event){
     const li=btn.parentNode;
     const inner=li.innerText;
     const text=inner.slice(0,inner.length-2);
-
-    finished.push(text);
+    const newId=Date.now();
+    const finishedObj={
+        text,
+        id:newId
+    }
+    finished.push(finishedObj);
     deleteToDo(event);
     saveFinished();
 }
@@ -88,21 +91,49 @@ function loadToDos(){
     }
 }
 
+function paintFinished(text){
+    const li=document.createElement("li");
+    const span=document.createElement("span");
+    const newId=Date.now();
+    span.innerText=text;
+    li.appendChild(span);
+    li.id=newId;
+    li.classList.add("js-finishedList-ul-li");
+    finishedList.appendChild(li);
+}
+
+
+const loadFinished = () =>{
+    const loadedFinished=localStorage.getItem(FINISHED_LS);
+    if(loadedFinished!==null){
+        const parsedFinished=JSON.parse(loadedFinished);
+        parsedFinished.forEach(f=> {
+            finished.push(f);
+        })
+    }
+}
 
 const initFinished = ()=>{
     closeBtn.addEventListener("click",(event)=>{
         finishedBox.classList.add("disappear");
         finishedListBtn.classList.remove("disappear");
+        while(finishedList.hasChildNodes()){
+            finishedList.removeChild(finishedList.firstChild);
+        }
     });
     finishedListBtn.addEventListener("click",(event)=>{
         finishedBox.classList.remove("disappear");
         finishedListBtn.classList.add("disappear");
-    })
+        finished.forEach(f=>{
+            paintFinished(f.text);
+        })
+    });
 }
 
 function init(){
     loadToDos();
     initFinished();
+    loadFinished();
     toDoForm.addEventListener("submit",handleSubmit);
     
 }

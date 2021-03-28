@@ -194,3 +194,6 @@ body{
     line-height: 30px;
     border:1px solid black;
 }
+#js-finishedList-ulbox{
+    overflow:scroll;
+}
