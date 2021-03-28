@@ -8,11 +8,30 @@
     <title>ToDoList!</title>
     <link rel="stylesheet" href="index.css" />
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@1,400;1,500&display=swap" rel="stylesheet">    
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@1,400;1,500&display=swap" rel="stylesheet">
 </head>
 
 <body>
+    <div id="js-finishedList" class="disappear">
+        <div id="js-finishedList-container">
+            <div id="js-finishedList-header">
+                <span>
+                    Finished-List
+                </span>
+                <div class="closeBtn">
+                    x
+                </div>
+            </div>
+            <div>
+                <ul class="js-finishedList-ul">
+                    <li>hello</li>
+                    <li>hi</li>
+                </ul>
+            </div>
+        </div>
+    </div>
     <div class="header">
+        <span id="finishedListBtn">Finished List</span>
         <span class="js-weather"></span>
     </div>
     <div class="container">
@@ -26,7 +45,7 @@
         <div class="renameBtn">Rename</div>
         <div class="toggleBtn disappear">change Mode</div>
         <form class="google-searchform">
-            <input id="google-searchbar" autocomplete="off" type="text" placeholder="Google Search or URL input"/>
+            <input id="google-searchbar" autocomplete="off" type="text" placeholder="Google Search or URL input" />
         </form>
         <form action="" class="js-toDoForm disappear">
             <input type="text" placeholder="Write a to do">

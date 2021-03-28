@@ -3,7 +3,10 @@ const toDoInput=toDoForm.querySelector("input");
 const toDoList=document.querySelector('.js-toDoList');
 const TODOS_LS="toDos";
 const FINISHED_LS="finishedToDos";
-
+const closeBtn=document.querySelector(".closeBtn");
+const finishedListBtn = document.querySelector("#finishedListBtn");
+const finishedBox= document.querySelector("#js-finishedList");
+const finishedList=document.querySelector(".js-finishedList-ul");
 let toDos=[];
 
 let finished=[];
@@ -85,8 +88,22 @@ function loadToDos(){
     }
 }
 
+
+const initFinished = ()=>{
+    closeBtn.addEventListener("click",(event)=>{
+        finishedBox.classList.add("disappear");
+        finishedListBtn.classList.remove("disappear");
+    });
+    finishedListBtn.addEventListener("click",(event)=>{
+        finishedBox.classList.remove("disappear");
+        finishedListBtn.classList.add("disappear");
+    })
+}
+
 function init(){
     loadToDos();
+    initFinished();
     toDoForm.addEventListener("submit",handleSubmit);
+    
 }
 init();
