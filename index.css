@@ -196,4 +196,5 @@ body{
 }
 #js-finishedList-ulbox{
     overflow:scroll;
+    width:100%;
 }
