@@ -176,6 +176,7 @@ body{
 
 #js-finishedList-container{
     display:grid;
+    height:100%;
     grid-template-rows: 30px 1fr;
 }
 
@@ -195,5 +196,6 @@ body{
     border:1px solid black;
 }
 #js-finishedList-ulbox{
-    overflow:scroll;
+    width:100%;
+    overflow-y:scroll;
 }
