@@ -196,12 +196,6 @@ body{
     border:1px solid black;
 }
 #js-finishedList-ulbox{
-<<<<<<< HEAD
     width:100%;
     overflow-y:scroll;
 }
-=======
-    overflow:scroll;
-    width:100%;
-}
->>>>>>> a12021c81fbaf5ad0cdc9b87d7fa4ded8811241b
