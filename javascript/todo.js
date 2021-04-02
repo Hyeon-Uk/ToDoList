@@ -91,30 +91,26 @@ function loadToDos(){
     }
 }
 
-function paintFinished(text){
+function paintFinished(f){
     const li=document.createElement("li");
     const span=document.createElement("span");
     const delBtn=document.createElement("button");
-    const newId=Date.now();
     delBtn.innerText="X";
     delBtn.addEventListener("click",(event)=>{
         const btn=event.target;
         const li=btn.parentNode;
         finishedList.removeChild(li);
         
-        console.log("del id=",li.id);
-        const arr=finished.filter((finish)=>{
-            console.log(finish.id);
+        const filteredFinished=finished.filter((finish)=>{
             return finish.id!==parseInt(li.id);
         });
-        
-        finished=arr;
+        finished=filteredFinished;
         saveFinished();
     });
-    span.innerText=text;
+    span.innerText=f.text;
     li.appendChild(span);
     li.appendChild(delBtn);
-    li.id=newId;
+    li.id=f.id;
     li.classList.add("js-finishedList-ul-li");
     finishedList.appendChild(li);
 }
@@ -142,7 +138,7 @@ const initFinished = ()=>{
         finishedBox.classList.remove("disappear");
         finishedListBtn.classList.add("disappear");
         finished.forEach(f=>{
-            paintFinished(f.text);
+            paintFinished(f);
         })
     });
 }
