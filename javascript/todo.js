@@ -94,9 +94,26 @@ function loadToDos(){
 function paintFinished(text){
     const li=document.createElement("li");
     const span=document.createElement("span");
+    const delBtn=document.createElement("button");
     const newId=Date.now();
+    delBtn.innerText="X";
+    delBtn.addEventListener("click",(event)=>{
+        const btn=event.target;
+        const li=btn.parentNode;
+        finishedList.removeChild(li);
+        
+        console.log("del id=",li.id);
+        const arr=finished.filter((finish)=>{
+            console.log(finish.id);
+            return finish.id!==parseInt(li.id);
+        });
+        
+        finished=arr;
+        saveFinished();
+    });
     span.innerText=text;
     li.appendChild(span);
+    li.appendChild(delBtn);
     li.id=newId;
     li.classList.add("js-finishedList-ul-li");
     finishedList.appendChild(li);
