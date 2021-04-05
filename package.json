@@ -1,8 +1,19 @@
 {
+<<<<<<< HEAD
   "name": "ToDoList",
   "version": "1.0.0",
   "description": "Address: https://hyeon-uk.github.io/ToDoList/",
   "main": "index.js",
+=======
+  "name": "todolist",
+  "version": "1.0.0",
+  "description": "Address: https://hyeon-uk.github.io/ToDoList/",
+  "main": "index.js",
+  "dependencies": {
+    "mysql": "^2.18.1"
+  },
+  "devDependencies": {},
+>>>>>>> 8546571da8f1bdcd57e2f7f8a6e5edf60a30a508
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -10,12 +21,16 @@
     "type": "git",
     "url": "git+https://github.com/Hyeon-Uk/ToDoList.git"
   },
+<<<<<<< HEAD
   "keywords": [],
+=======
+>>>>>>> 8546571da8f1bdcd57e2f7f8a6e5edf60a30a508
   "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Hyeon-Uk/ToDoList/issues"
   },
+<<<<<<< HEAD
   "homepage": "https://github.com/Hyeon-Uk/ToDoList#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
@@ -24,4 +39,7 @@
     "mysql": "^2.18.1",
     "nodemon": "^2.0.7"
   }
+=======
+  "homepage": "https://github.com/Hyeon-Uk/ToDoList#readme"
+>>>>>>> 8546571da8f1bdcd57e2f7f8a6e5edf60a30a508
 }
