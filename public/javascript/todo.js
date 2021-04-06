@@ -7,12 +7,11 @@ const closeBtn=document.querySelector(".closeBtn");
 const finishedListBtn = document.querySelector("#finishedListBtn");
 const finishedBox= document.querySelector("#js-finishedList");
 const finishedList=document.querySelector(".js-finishedList-ul");
+const currentUser=localStorage.getItem(USER_LS);
 let toDos=[];
 let finished=[];
 
-function saveFinished(){
-    localStorage.setItem(FINISHED_LS,JSON.stringify(finished));
-}
+const AJAX_URL='http://127.0.0.1:8000/';
 
 function clearToDo(event){
     const btn=event.target;
@@ -26,13 +25,24 @@ function clearToDo(event){
     }
     finished.push(finishedObj);
     deleteToDo(event);
-    saveFinished();
+    addAjax(`${AJAX_URL}add`,text,"finishedlist");
 }
+
+
+const deleteAjax=(url,data,table)=>{
+    const Data=JSON.stringify({topic:data,table:table,user_name:currentUser});
+    const xhr=new XMLHttpRequest();
+    xhr.open("post",url);
+    xhr.setRequestHeader("Content-type","application/json");
+    xhr.send(Data);
+}
+
 
 function deleteToDo(event){
     const btn=event.target;
     const li=btn.parentNode;
-
+    let topic=li.innerText;
+    topic=topic.slice(0,topic.length-2);
     //html dom 제거
     toDoList.removeChild(li);
 
@@ -43,12 +53,91 @@ function deleteToDo(event){
 
     //갱신후 저장
     toDos=cleanToDos;
-    saveToDos();
+    deleteAjax(`${AJAX_URL}delete`,topic,"todolist");
 }
 
-function saveToDos(){
-    localStorage.setItem(TODOS_LS,JSON.stringify(toDos));
+
+const addAjax=(url,data,table)=>{
+    const Data=JSON.stringify({user_name:currentUser,topic:data,table:table});
+    const xhr=new XMLHttpRequest();
+    xhr.open("post",url);
+    xhr.setRequestHeader("Content-type","application/json");
+    xhr.send(Data);
 }
+
+function handleSubmit(event){
+    event.preventDefault();
+    const currentValue=toDoInput.value;
+    addAjax(`${AJAX_URL}add`,currentValue,"todolist");
+    paintToDo(currentValue);
+    toDoInput.value="";
+}
+
+function paintFinished(f){
+    const li=document.createElement("li");
+    const span=document.createElement("span");
+    const delBtn=document.createElement("button");
+    delBtn.innerText="X";
+    delBtn.addEventListener("click",(event)=>{
+        const btn=event.target;
+        const li=btn.parentNode;
+        let topic=li.innerText;
+        topic=topic.slice(0,topic.length-1);
+        finishedList.removeChild(li);
+        
+        const filteredFinished=finished.filter((finish)=>{
+            return finish.id!==parseInt(li.id);
+        });
+        finished=filteredFinished;
+        deleteAjax(`${AJAX_URL}delete`,topic,"finishedlist");
+    });
+    span.innerText=f;
+    li.appendChild(span);
+    li.appendChild(delBtn);
+    li.id=f.id;
+    li.classList.add("js-finishedList-ul-li");
+    finishedList.appendChild(li);
+}
+
+const loadFinished = () =>{
+    finished.forEach(each=>{
+        paintFinished(each.text);
+    })
+}
+
+const initFinished = ()=>{
+    closeBtn.addEventListener("click",(event)=>{
+        finishedBox.classList.add("disappear");
+        finishedListBtn.classList.remove("disappear");
+        while(finishedList.hasChildNodes()){
+            finishedList.removeChild(finishedList.firstChild);
+        }
+    });
+    finishedListBtn.addEventListener("click",(event)=>{
+        finishedBox.classList.remove("disappear");
+        finishedListBtn.classList.add("disappear");
+    });
+}
+
+//load saved finishedlist from database!!
+const getFinishedListAjax= (url)=>{
+    const Data=JSON.stringify({user_name:currentUser});
+    const xhr=new XMLHttpRequest();
+    xhr.open("post",url);
+    xhr.setRequestHeader("Content-type","application/json");
+    xhr.send(Data);
+
+    xhr.addEventListener("load",()=>{
+        const result=JSON.parse(xhr.responseText);
+        result.forEach(each=>{
+            finished.push({
+                text:each.topic
+            });
+        })
+        loadFinished();
+    });
+}
+
 
 function paintToDo(text){
     const li=document.createElement("li");
@@ -71,82 +160,39 @@ function paintToDo(text){
         id:newId,
     }
     toDos.push(toDosObj);
-    saveToDos();
 }
 
-function handleSubmit(event){
-    event.preventDefault();
-    const currentValue=toDoInput.value;
-    paintToDo(currentValue);
-    toDoInput.value="";
-}
-
+//paint all todo
 function loadToDos(){
-    const loadedToDos=localStorage.getItem(TODOS_LS);
-    if(loadedToDos!==null){
-        const parsedToDos=JSON.parse(loadedToDos);
-        parsedToDos.forEach(toDo => {
-            paintToDo(toDo.text);
-        });
-    }
-}
-
-function paintFinished(f){
-    const li=document.createElement("li");
-    const span=document.createElement("span");
-    const delBtn=document.createElement("button");
-    delBtn.innerText="X";
-    delBtn.addEventListener("click",(event)=>{
-        const btn=event.target;
-        const li=btn.parentNode;
-        finishedList.removeChild(li);
-        
-        const filteredFinished=finished.filter((finish)=>{
-            return finish.id!==parseInt(li.id);
-        });
-        finished=filteredFinished;
-        saveFinished();
-    });
-    span.innerText=f.text;
-    li.appendChild(span);
-    li.appendChild(delBtn);
-    li.id=f.id;
-    li.classList.add("js-finishedList-ul-li");
-    finishedList.appendChild(li);
+    toDos.forEach(toDo=>{
+        paintToDo(toDo.text);
+    })
 }
 
 
-const loadFinished = () =>{
-    const loadedFinished=localStorage.getItem(FINISHED_LS);
-    if(loadedFinished!==null){
-        const parsedFinished=JSON.parse(loadedFinished);
-        parsedFinished.forEach(f=> {
-            finished.push(f);
+//load saved todolist from database!!
+const getToDoListAjax= (url)=>{
+    const Data=JSON.stringify({user_name:currentUser});
+    const xhr=new XMLHttpRequest();
+    xhr.open("post",url);
+    xhr.setRequestHeader("Content-type","application/json");
+    xhr.send(Data);
+
+    xhr.addEventListener("load",()=>{
+        const result=JSON.parse(xhr.responseText);
+        result.forEach(each=>{
+            toDos.push({
+                text:each.topic
+            });
         })
-    }
-}
-
-const initFinished = ()=>{
-    closeBtn.addEventListener("click",(event)=>{
-        finishedBox.classList.add("disappear");
-        finishedListBtn.classList.remove("disappear");
-        while(finishedList.hasChildNodes()){
-            finishedList.removeChild(finishedList.firstChild);
-        }
-    });
-    finishedListBtn.addEventListener("click",(event)=>{
-        finishedBox.classList.remove("disappear");
-        finishedListBtn.classList.add("disappear");
-        finished.forEach(f=>{
-            paintFinished(f);
-        })
+        loadToDos();
     });
 }
 
 function init(){
-    loadToDos();
+    getToDoListAjax(`${AJAX_URL}gettodo`);
     initFinished();
-    loadFinished();
+    getFinishedListAjax(`${AJAX_URL}getfinished`);
     toDoForm.addEventListener("submit",handleSubmit);
     
 }
