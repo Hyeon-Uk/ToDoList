@@ -4,7 +4,9 @@ const bodyParser=require('body-parser');
 const cors=require('cors');
 const mysql=require('mysql');
 const path=require('path');
-//const db=require('./lib/db');
+// const db=require('./lib/db');
+
+const port=process.env.PORT;
 
 const db=mysql.createConnection({
     host:'localhost',
@@ -20,7 +22,7 @@ app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(cors());
 
-app.listen("8000",()=>{
+app.listen(port,()=>{
 });
 
 app.post('/add',(req,res)=>{
