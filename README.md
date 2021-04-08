@@ -10,7 +10,9 @@ Finished List✔
 Today's Weather✔   
 Random Background✔   
 Google Searchbar✔     
-Responsive web design
+Responsive web design   
+DataBase   
+WebServer
    
 Used Language:     
 JavaScript!    
