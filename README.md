@@ -10,10 +10,14 @@ Finished List✔
 Today's Weather✔   
 Random Background✔   
 Google Searchbar✔     
-Responsive web design
+Responsive web design   
+DataBase   
+WebServer
    
 Used Language:     
-JavaScript!    
+JavaScript!!   
+Node.js!!   
+express.js!!   
 used api:   
 [unsplash](https://unsplash.com/)   
 [openWeatherMap](https://openweathermap.org/)   
