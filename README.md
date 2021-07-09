@@ -15,9 +15,7 @@ DataBase
 WebServer
    
 Used Language:     
-JavaScript!!   
-Node.js!!   
-express.js!!   
+JavaScript!!    
 used api:   
 [unsplash](https://unsplash.com/)   
 [openWeatherMap](https://openweathermap.org/)   
